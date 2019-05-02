@@ -28,6 +28,10 @@ THE SOFTWARE.
 #ifndef __D3D9PREREQUISITES_H__
 #define __D3D9PREREQUISITES_H__
 
+// fix linker error in VS 2015 onwards
+// https://docs.microsoft.com/en-us/cpp/porting/visual-cpp-change-history-2003-2015?view=vs-2017
+#pragma comment(lib, "legacy_stdio_definitions.lib")
+
 #include "OgrePrerequisites.h"
 #ifdef __MINGW32__
 #  include "WIN32/OgreMinGWSupport.h" // extra defines for MinGW to deal with DX SDK
@@ -73,7 +77,6 @@ THE SOFTWARE.
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <DxErr.h>
-
 
 namespace Ogre
 {
