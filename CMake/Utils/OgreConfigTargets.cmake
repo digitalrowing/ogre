@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------
+ #-------------------------------------------------------------------
 # This file is part of the CMake build system for OGRE
 #     (Object-oriented Graphics Rendering Engine)
 # For the latest info, see http://www.ogre3d.org/
@@ -251,7 +251,10 @@ function(ogre_config_framework LIBNAME)
       # Set the INSTALL_PATH so that frameworks can be installed in the application package
       set_target_properties(${LIBNAME}
          PROPERTIES BUILD_WITH_INSTALL_RPATH 1
-         INSTALL_NAME_DIR "@executable_path/../Frameworks"
+         #INSTALL_NAME_DIR "@executable_path/../Frameworks"
+         # GR for RowPro use rpath. This is so that it works when embedded in a Python module as the @executable_path
+         # is that of the Python interpreter, not the script it is running.
+         INSTALL_NAME_DIR "@rpath/../Frameworks"
       )
       set_target_properties(${LIBNAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES};${PLATFORM_HEADERS};" )
       set_target_properties(${LIBNAME} PROPERTIES XCODE_ATTRIBUTE_GCC_PRECOMPILE_PREFIX_HEADER "YES")
